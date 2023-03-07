@@ -1,86 +1,49 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type { NextPage } from "next";
+import Head from "next/head";
+import { useState } from "react";
+import Detect from "../components/Detect";
+import Translate from "../components/Translate";
 
 const Home: NextPage = () => {
+  const [active, setActive] = useState(0);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="h-screen w-full bg-slate-200">
       <Head>
-        <title>Create Next App</title>
+        <title>Translator App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+      <div className="w-full flex justify-center items-center py-10">
+        <div className="rounded-full bg-slate-300">
+          <button
+            type="button"
+            onClick={() => setActive(1)}
+            className={`py-2 px-5 hover:bg-lime-400 hover:text-white ${
+              active === 1 && "bg-lime-500 text-white"
+            } transition-all duration-300 ease-in-out rounded-full`}
           >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            Translate
+          </button>
+          <button
+            type="button"
+            onClick={() => setActive(2)}
+            className={`py-2 px-5 hover:bg-lime-400 hover:text-white ${
+              active === 2 && "bg-lime-500 text-white"
+            } transition-all duration-300 ease-in-out rounded-full`}
           >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            Detect language
+          </button>
         </div>
-      </main>
+      </div>
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+      {active === 0 && (
+        <div className="w-full text-center mt-10">
+          <p>Click the above buttons to select what you want to do.</p>
+        </div>
+      )}
+      {active === 1 && <Translate />}
+      {active === 2 && <Detect />}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
